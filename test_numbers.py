@@ -6,8 +6,9 @@ def test_number_requester_returns_a_valid_result_when_called():
 
     Result:
         A result as a dict in the form {'result': 'SUCCESS', 'number': 13, "fact": "13 is lucky for some."}
-    
+        
     """
+    pass
 
 
 def test_number_requester_keeps_log_of_requests():
@@ -20,7 +21,7 @@ def test_number_requester_keeps_log_of_requests():
     Result:
         The NumberRequester.log attribute returns a array of five valid results. Each result
         is a serialisable dict in the form:
-        {'request_number': 1, 'call_time': '2022-11-09T11:56', 'end_point': 'http://numbersapi.com/random/math',
+        {'request_number': 1, 'call_time': '2022-11-09T16:38:23.417667', 'end_point': 'http://numbersapi.com/random/math',
         'result': 'SUCCESS', 'number': 49}
         
     """

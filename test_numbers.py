@@ -6,7 +6,7 @@ def test_number_requester_returns_a_valid_result_when_called():
 
     Result:
         A result as a dict in the form {'result': 'SUCCESS', 'number': 13, "fact": "13 is lucky for some."}
-        
+
     """
     pass
 
@@ -84,4 +84,3 @@ def test_number_cruncher_discards_random_item_when_tummy_full():
     
     """
     pass
-

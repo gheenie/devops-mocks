@@ -57,7 +57,7 @@ def test_number_cruncher_likes_even_numbers():
 
 
 def test_number_cruncher_hates_odd_numbers():
-    """Test that the crunch method rejects number facts for even numbers.
+    """Test that the crunch method rejects number facts for odd numbers.
     
     Given:
          A Number cruncher instance getting an odd result for its "crunch" method eg 13

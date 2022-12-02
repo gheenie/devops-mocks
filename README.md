@@ -67,4 +67,4 @@ def test_my_func_is_ok():
         mocks['thing1'].return_value = ...
 ```
 
-There is lots more in the documentation - [https://docs.python.org/3/library/unittest.mock.html]()
+There is lots more in the documentation - [https://docs.python.org/3/library/unittest.mock.html](https://docs.python.org/3/library/unittest.mock.html)

@@ -1,6 +1,6 @@
 # Mocking and Patching
 
-The `numbers.py` file contains two classes, `NumberRequester` and `NumberCruncher`. The `NumberRequester` gets a random number fact from the `numbersapi` endpoint. It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.
+The `cruncher.py` file contains two classes, `NumberRequester` and `NumberCruncher`. The `NumberRequester` gets a random number fact from the `numbersapi` endpoint. It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.
 
 Example:
 ```python
@@ -17,7 +17,7 @@ The `NumberCruncher` eats number facts, although it only has a limited capacity.
 
 If we start a REPL, we should be able to do something like this:
 ```python
->>> from numbers import NumberCruncher
+>>> from cruncher import NumberCruncher
 >>> nc = NumberCruncher(3) # a NumberCruncher that can store 3 facts
 >>> nc.crunch()
 'Yum! 8100'   # stored 8100. NumberRequester is invoked from within NumberCruncher

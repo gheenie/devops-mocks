@@ -1,6 +1,6 @@
 # Mocking and Patching
 
-The `cruncher.py` file contains two classes, `NumberRequester` and `NumberCruncher`. The `NumberRequester` gets a random number fact from the [numbersapi endpoint](http://numbersapi.com/). (Internally, it uses the `requests` API to make the REST call. It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.
+The `cruncher.py` file contains two classes, `NumberRequester` and `NumberCruncher`. The `NumberRequester` gets a random number fact from the [numbersapi endpoint](http://numbersapi.com/). (Internally, it uses the `requests` API to make the REST call.) It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.
 
 Example:
 ```python

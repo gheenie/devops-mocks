@@ -59,8 +59,7 @@ class NumberCruncher:
                     self.tummy.append(digested)
                     return f'Yum! {digested["number"]}'
                 else:
-                    num_to_pop = randint(0, self.max_tummy_size - 1)
-                    popped = self.tummy.pop(num_to_pop)
+                    popped = self.tummy.pop(0)
                     self.tummy.append(digested)
                     return f'Burp! {popped["number"]}'
             else:

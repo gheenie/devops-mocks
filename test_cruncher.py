@@ -26,7 +26,7 @@ def test_number_cruncher_hates_odd_numbers():
     pass
 
 
-def test_number_cruncher_discards_random_item_when_tummy_full():
+def test_number_cruncher_discards_oldest_item_when_tummy_full():
     """Test that the crunch method maintains a maximum number of facts.
     
     Given:
@@ -34,7 +34,7 @@ def test_number_cruncher_discards_random_item_when_tummy_full():
          an even result for its "crunch" method, eg 24.
 
     Result:
-        Method deletes one result from tummy (eg 42)
+        Method deletes oldest result from tummy (eg 42)
         Method returns "Burp! 42"
         The tummy attribute contains 24 but not 42.
     
@@ -47,7 +47,7 @@ def test_number_cruncher_raises_runtime_error_if_invalid_number_request():
 
         Given:
             A NumberCruncher instance, receiving an invalid NumberRequester
-            response
+            response (eg an AttributeError)
 
         Result: 
             Raises RuntimeError

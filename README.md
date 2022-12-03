@@ -16,7 +16,7 @@ In the REPL:
 The `NumberCruncher` eats number facts, although it only has a limited capacity. When it is started you have to specify the size of its tummy (ie how many number facts it can store). It has a `NumberRequester` built in. To `crunch` a number, it uses the `NumberRequester` to get a number fact. It then does one of three things:
 1. It hates odd numbers, so if the number is odd, it just rejects it with a "Yuk!" message.
 1. If the number is even, and its tummy is not full, it happily eats the number fact and returns a "Yum!" message.
-1. If the number is even, and its tummy is full, it expels one number fact at random from its tummy to make room for the new one. It returns a "Burp!" message.
+1. If the number is even, and its tummy is full, it expels the oldest number fact from its tummy to make room for the new one. It returns a "Burp!" message.
 
 ### Example:
 If we start a REPL, we should be able to do something like this:
@@ -34,9 +34,9 @@ If we start a REPL, we should be able to do something like this:
 >>> nc.crunch()
 'Yum! 436'  # stored - tummy full
 >>> nc.crunch()
-'Burp! 436' # 436 burped out to make room for the new fact
+'Burp! 8100' # 8100 burped out to make room for the new fact
 >>> nc.tummy
-[{'number': 8100, 'fact': '8100 is divisible by its reverse.'}, {'number': 730, 'fact': '730 is the number of connected bipartite graphs with 9 vertices.'}, {'number': 5624, 'fact': '5624 is the number of binary 5×5 matrices up to permutations of rows and columns.'}]
+[{'number': 730, 'fact': '730 is the number of connected bipartite graphs with 9 vertices.'}, {'number': 436, 'fact': '436 is a boring number.'}, {'number': 5624, 'fact': '5624 is the number of binary 5×5 matrices up to permutations of rows and columns.'}]
 >>> nc.requester.log
 [{'request_number': 1, 'call_time': '2022-11-09T16:38:23.417667', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 8100},  
 {'request_number': 2, 'call_time': '2022-11-09T16:38:26.111704', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 5335},  

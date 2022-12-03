@@ -1,6 +1,6 @@
 # Mocking and Patching
 
-The `cruncher.py` file contains two classes, `NumberRequester` and `NumberCruncher`. The `NumberRequester` gets a random number fact from the `numbersapi` endpoint. It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.
+The `cruncher.py` file contains two classes, `NumberRequester` and `NumberCruncher`. The `NumberRequester` gets a random number fact from the [numbersapi endpoint](http://numbersapi.com/). (Internally, it uses the `requests` API to make the REST call. It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.
 
 Example:
 ```python
@@ -24,13 +24,9 @@ If we start a REPL, we should be able to do something like this:
 >>> nc.crunch()
 'Yuk! 5335'
 >>> nc.crunch()
-'Yuk! 5565'
->>> nc.crunch()
 'Yum! 730'  # stored
 >>> nc.tummy
 [{'number': 8100, 'fact': '8100 is divisible by its reverse.'}, {'number': 730, 'fact': '730 is the number of connected bipartite graphs with 9 vertices.'}]
->>> nc.crunch()
-'Yuk! 9267'
 >>> nc.crunch()
 'Yum! 436'  # stored - tummy full
 >>> nc.crunch()
@@ -38,7 +34,11 @@ If we start a REPL, we should be able to do something like this:
 >>> nc.tummy
 [{'number': 8100, 'fact': '8100 is divisible by its reverse.'}, {'number': 730, 'fact': '730 is the number of connected bipartite graphs with 9 vertices.'}, {'number': 5624, 'fact': '5624 is the number of binary 5×5 matrices up to permutations of rows and columns.'}]
 >>> nc.requester.log
-[{'request_number': 1, 'call_time': '2022-11-09T16:38:23.417667', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 8100}, {'request_number': 2, 'call_time': '2022-11-09T16:38:26.111704', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 5335}, {'request_number': 3, 'call_time': '2022-11-09T16:38:31.689280', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 5565}, {'request_number': 4, 'call_time': '2022-11-09T16:38:37.810081', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 730}, {'request_number': 5, 'call_time': '2022-11-09T16:38:52.720854', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 9267}, {'request_number': 6, 'call_time': '2022-11-09T16:38:55.040040', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 436}, {'request_number': 7, 'call_time': '2022-11-09T16:39:07.712827', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 5624}]
+[{'request_number': 1, 'call_time': '2022-11-09T16:38:23.417667', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 8100},  
+{'request_number': 2, 'call_time': '2022-11-09T16:38:26.111704', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 5335},  
+{'request_number': 3, 'call_time': '2022-11-09T16:38:37.810081', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 730},  
+{'request_number': 4, 'call_time': '2022-11-09T16:38:55.040040', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 436},  
+{'request_number': 5, 'call_time': '2022-11-09T16:39:07.712827', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 5624}]
 ```
 
 So this works but - shock!!! - it has no unit tests!!! This is, of course, unacceptable. Your task is to write some. A test suite has been prepared with some specifications for behaviour we want to test for. However, they have not been implemented. You should implement these tests, making use of `Mock`s and `patch`es where necessary. The code as written should pass the required tests. But if you complete those tests, feel free to write new ones making more rigorous checks on `NumberCruncher` and `NumberRequester` behaviour. If you think something is wrong, fix it!

@@ -47,7 +47,6 @@ class NumberCruncher:
         self.max_tummy_size = size_of_tummy
         self.requester = NumberRequester()
 
-
     def crunch(self):
         result = self.requester.call()
         if result['number'] % 2 == 0:
@@ -59,7 +58,8 @@ class NumberCruncher:
                 self.tummy.append(digested)
                 return f'Yum! {digested["number"]}'
             else:
-                popped = self.tummy.pop(randint(0, self.max_tummy_size - 1))
+                num_to_pop = randint(0, self.max_tummy_size - 1)
+                popped = self.tummy.pop(num_to_pop)
                 self.tummy.append(digested)
                 return f'Burp! {popped["number"]}'
         else:

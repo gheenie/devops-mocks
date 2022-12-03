@@ -2,7 +2,8 @@
 
 The `cruncher.py` file contains two classes, `NumberRequester` and `NumberCruncher`. The `NumberRequester` gets a random number fact from the [numbersapi endpoint](http://numbersapi.com/). (Internally, it uses the `requests` API to make the REST call.) It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.
 
-Example:
+### Example:
+In the REPL:
 ```python
 >>> from cruncher import NumberRequester
 >>> nr = NumberRequester()
@@ -15,6 +16,7 @@ The `NumberCruncher` eats number facts, although it only has a limited capacity.
 1. If the number is even, and its tummy is not full, it happily eats the number fact and returns a "Yum!" message.
 1. If the number is even, and its tummy is full, it expels one number fact at random from its tummy to make room for the new one. It returns a "Burp!" message.
 
+### Example:
 If we start a REPL, we should be able to do something like this:
 ```python
 >>> from cruncher import NumberCruncher
@@ -42,6 +44,13 @@ If we start a REPL, we should be able to do something like this:
 ```
 
 So this works but - shock!!! - it has no unit tests!!! This is, of course, unacceptable. Your task is to write some. A test suite has been prepared with some specifications for behaviour we want to test for. However, they have not been implemented. You should implement these tests, making use of `Mock`s and `patch`es where necessary. The code as written should pass the required tests. But if you complete those tests, feel free to write new ones making more rigorous checks on `NumberCruncher` and `NumberRequester` behaviour. If you think something is wrong, fix it!
+
+## Installation and Set Up
+1. You will need Python 3.10.6. Make sure that your `pyenv` installation has this available. 
+1. Fork and clone the repository. 
+1. Create a virtual environment.
+1. Activate the environment and run `pip install -r requirements.txt`
+1. Ensure that you can access the `cruncher` classes in the REPL as shown in the example above.
 
 ## Hint - Multiple Patches
 You may want to `patch` several things at the same time. There are a number of ways to accomplish this.

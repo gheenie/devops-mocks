@@ -43,7 +43,15 @@ If we start a REPL, we should be able to do something like this:
 {'request_number': 5, 'call_time': '2022-11-09T16:39:07.712827', 'end_point': 'http://numbersapi.com/random/math', 'result': 'SUCCESS', 'number': 5624}]
 ```
 
-So this works but - shock!!! - it has no unit tests!!! This is, of course, unacceptable. Your task is to write some. A test suite has been prepared with some specifications for behaviour we want to test for. However, they have not been implemented. You should implement these tests, making use of `Mock`s and `patch`es where necessary. The code as written should pass the required tests. But if you complete those tests, feel free to write new ones making more rigorous checks on `NumberCruncher` and `NumberRequester` behaviour. If you think something is wrong, fix it!
+So this works but - shock!!! - it has no unit tests!!! This is, of course, unacceptable. Your task is to write some. Two test files have been prepared with some specifications for behaviour we want to test for - one file tests `NumberCruncher` and one tests `NumberRequester`. However, the tests have not been implemented. You should implement them, making use of mocking techniques. 
+
+### Task One - implement the tests in `test_cruncher.py`
+
+### Task Two - implement the tests in `test_requester.py`
+
+The code as written should pass the required tests. But if you complete those tests, feel free to write new ones making more rigorous checks on `NumberCruncher` and `NumberRequester` behaviour. If you think something is wrong, fix it!
+
+
 
 ## Installation and Set Up
 1. You will need Python 3.10.6. Make sure that your `pyenv` installation has this available. 
@@ -51,29 +59,3 @@ So this works but - shock!!! - it has no unit tests!!! This is, of course, unacc
 1. Create a virtual environment.
 1. Activate the environment and run `pip install -r requirements.txt`
 1. Ensure that you can access the `cruncher` classes in the REPL as shown in the example above.
-
-## Hint - Multiple Patches
-You may want to `patch` several things at the same time. There are a number of ways to accomplish this.
-
-You can used stacked decorators, like this:
-```python
-from unittest.mock import patch
-
-@patch('mymodule.thing1')
-@patch('mymodule.thing2')
-def test_my_func_is_ok(mock_thing2, mock_thing1):  # The order is important!! The decorators work from the bottom up!
-    ...
-```
-
-If you prefer the `with` context manager, you can use `patch.multiple`:
-```python
-from unittest.mock import patch, DEFAULT
-
-def test_my_func_is_ok():
-    with patch.multiple('mymodule', thing1=DEFAULT, thing2=DEFAULT) as mocks:
-        # mocks is a dict: {'thing1': <MagicMock name='thing1' id='4344484896'>, 
-        # 'thing2': <MagicMock name='thing2' id='4371673488'>}
-        mocks['thing1'].return_value = ...
-```
-
-There is lots more in the documentation - [https://docs.python.org/3/library/unittest.mock.html](https://docs.python.org/3/library/unittest.mock.html)

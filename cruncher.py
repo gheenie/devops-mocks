@@ -48,20 +48,24 @@ class NumberCruncher:
         self.requester = NumberRequester()
 
     def crunch(self):
-        result = self.requester.call()
-        if result['number'] % 2 == 0:
-            digested = {
-                'number': result['number'], 
-                "fact": result['fact']
-                }
-            if len(self.tummy) < self.max_tummy_size:
-                self.tummy.append(digested)
-                return f'Yum! {digested["number"]}'
+        try:
+            result = self.requester.call()
+            if result['number'] % 2 == 0:
+                digested = {
+                    'number': result['number'], 
+                    "fact": result['fact']
+                    }
+                if len(self.tummy) < self.max_tummy_size:
+                    self.tummy.append(digested)
+                    return f'Yum! {digested["number"]}'
+                else:
+                    num_to_pop = randint(0, self.max_tummy_size - 1)
+                    popped = self.tummy.pop(num_to_pop)
+                    self.tummy.append(digested)
+                    return f'Burp! {popped["number"]}'
             else:
-                num_to_pop = randint(0, self.max_tummy_size - 1)
-                popped = self.tummy.pop(num_to_pop)
-                self.tummy.append(digested)
-                return f'Burp! {popped["number"]}'
-        else:
-            return f'Yuk! {result["number"]}'
+                return f'Yuk! {result["number"]}'
+        except Exception as e:
+            print(e)
+            raise RuntimeError('Unexpected error')
 

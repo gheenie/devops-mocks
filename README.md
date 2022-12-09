@@ -5,7 +5,7 @@
 1. Fork and clone the repository. 
 1. Create a virtual environment.
 1. Activate the environment and run `pip install -r requirements.txt`
-1. Ensure that you can access the `cruncher` classes in the REPL as shown in the example above.
+1. Ensure that you can access the `cruncher` classes in the REPL as shown in the example below.
 
 <br>
 

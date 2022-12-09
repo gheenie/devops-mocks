@@ -1,5 +1,15 @@
 # Mocking and Patching
 
+## Installation and Set Up
+1. You will need Python 3.10.6. Make sure that your `pyenv` installation has this available. 
+1. Fork and clone the repository. 
+1. Create a virtual environment.
+1. Activate the environment and run `pip install -r requirements.txt`
+1. Ensure that you can access the `cruncher` classes in the REPL as shown in the example above.
+
+<br>
+
+## Sprint
 The `cruncher.py` file contains two classes, `NumberRequester` and `NumberCruncher`. 
 
 The `NumberRequester` gets a random number fact from the [numbersapi endpoint](http://numbersapi.com/). (Internally, it uses the `requests` API to make the REST call.) It makes a careful note of the results of each request in a log and returns a dictionary with the number and its associated fact.

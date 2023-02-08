@@ -29,7 +29,7 @@ def test_number_requester_keeps_log_of_requests():
 
     Given:
         A NumberRequester is instantiated.
-        The NumberRequester.request method is called 5 times at known times.
+        The NumberRequester.call method is called 5 times at known times.
 
     Result:
         The NumberRequester.log attribute returns a array of five valid results. Each result

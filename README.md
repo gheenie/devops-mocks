@@ -1,11 +1,25 @@
 # Mocking and Patching
 
 ## Installation and Set Up
-1. You will need Python 3.10.6. Make sure that your `pyenv` installation has this available. 
-1. Fork and clone the repository. 
-1. Create a virtual environment.
-1. Activate the environment and run `pip install -r requirements.txt`
-1. Ensure that you can access the `cruncher` classes in the REPL as shown in the example below.
+1. You will need **at least** Python 3.10.6.
+2. Fork and clone the repository. 
+3. Create a virtual environment.
+4. Activate the environment and run `pip install -r requirements.txt`
+5. Ensure that you can access the `cruncher` classes in the REPL as shown in the example below.
+
+## Troubleshooting Pytest
+
+It's quite common to see the following error when first setting up this sprint: 
+```
+ModuleNotFoundError: No module named 'requests'
+```
+Here are a few steps you can take:
+- Deactivate your Virtual Environment and follow the setup steps again to recreate it.
+- Close you terminal session and reopen it. Set the `PYTHONPATH` environment variable and try running `pytest` again.
+- When you're inside the Virtual Environment check where the `pytest` command is located. You can do this by running the command `which pytest`. It should give you the path to your local Venv directory. 
+- If the `pytest` command is not located in your local Venv then you may have installed Python globally on your machine. If that is the case then deactivate your venv and uninstall the global `pytest` by running `pip uninstall pytest`. Reactivate your virtual environment and re-run the `pytest` command.
+
+If this doesn't help then drop an NC Help and we'll help you get sorted!
 
 <br>
 
@@ -25,8 +39,8 @@ In the REPL:
 
 The `NumberCruncher` eats number facts, although it only has a limited capacity. When it is started you have to specify the size of its tummy (ie how many number facts it can store). It has a `NumberRequester` built in. To `crunch` a number, it uses the `NumberRequester` to get a number fact. It then does one of three things:
 1. It hates odd numbers, so if the number is odd, it just rejects it with a "Yuk!" message.
-1. If the number is even, and its tummy is not full, it happily eats the number fact and returns a "Yum!" message.
-1. If the number is even, and its tummy is full, it expels the oldest number fact from its tummy to make room for the new one. It returns a "Burp!" message.
+2. If the number is even, and its tummy is not full, it happily eats the number fact and returns a "Yum!" message.
+3. If the number is even, and its tummy is full, it expels the oldest number fact from its tummy to make room for the new one. It returns a "Burp!" message.
 
 ### Example:
 If we start a REPL, we should be able to do something like this:
@@ -62,12 +76,3 @@ So this works but - shock!!! - it has no unit tests!!! This is, of course, unacc
 ### Task Two - implement the tests in `test_requester.py`
 
 The code as written should pass the required tests. But if you complete those tests, feel free to write new ones making more rigorous checks on `NumberCruncher` and `NumberRequester` behaviour. If you think something is wrong, fix it!
-
-
-
-## Installation and Set Up
-1. You will need Python 3.10.6. Make sure that your `pyenv` installation has this available. 
-1. Fork and clone the repository. 
-1. Create a virtual environment.
-1. Activate the environment and run `pip install -r requirements.txt`
-1. Ensure that you can access the `cruncher` classes in the REPL as shown in the example above.

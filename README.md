@@ -19,6 +19,8 @@ Here are a few steps you can take:
 - When you're inside the Virtual Environment check where the `pytest` command is located. You can do this by running the command `which pytest`. It should give you the path to your local Venv directory. 
 - If the `pytest` command is not located in your local Venv then you may have installed Python globally on your machine. If that is the case then deactivate your venv and uninstall the global `pytest` by running `pip uninstall pytest`. Reactivate your virtual environment and re-run the `pytest` command.
 
+If this doesn't help then drop an NC Help and we'll help you get sorted!
+
 <br>
 
 ## Sprint

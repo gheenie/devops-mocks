@@ -1,3 +1,8 @@
+from cruncher import NumberCruncher
+from unittest.mock import Mock
+import pytest
+
+
 def test_number_cruncher_likes_even_numbers():
     """Test that the crunch method saves number facts for even numbers.
     
@@ -9,7 +14,14 @@ def test_number_cruncher_likes_even_numbers():
         The tummy attribute contains a dict such as {'number': 42, "fact": "42 is the meaning of life."}
     
     """
-    pass
+    
+    number_cruncher = NumberCruncher(2)
+    number_cruncher.requester.call = Mock(return_value={'result': 'SUCCESS', 'number': 42, "fact": 'cool'})
+
+    output = number_cruncher.crunch()
+
+    assert output == "Yum! 42"
+    assert number_cruncher.tummy == [{'number': 42, 'fact': 'cool'}]
 
 
 def test_number_cruncher_hates_odd_numbers():
@@ -23,7 +35,14 @@ def test_number_cruncher_hates_odd_numbers():
         The tummy attribute is unchanged.
     
     """
-    pass
+    
+    number_cruncher = NumberCruncher(2)
+    number_cruncher.requester.call = Mock(return_value={'result': 'SUCCESS', 'number': 43, "fact": 'cool'})
+
+    output = number_cruncher.crunch()
+
+    assert output == "Yuk! 43"
+    assert number_cruncher.tummy == []
 
 
 def test_number_cruncher_discards_oldest_item_when_tummy_full():
@@ -39,7 +58,18 @@ def test_number_cruncher_discards_oldest_item_when_tummy_full():
         The tummy attribute contains 24 but not 42.
     
     """
-    pass
+    
+    number_cruncher = NumberCruncher(2)
+    number_cruncher.requester.call = Mock(return_value={'result': 'SUCCESS', 'number': 42, "fact": 'cool'})
+
+    number_cruncher.crunch()
+    number_cruncher.crunch()
+    number_cruncher.requester.call = Mock(return_value={'result': 'SUCCESS', 'number': 40, "fact": 'cool'})
+    output = number_cruncher.crunch()
+
+    assert output == "Burp! 42"
+    assert [digest['number'] for digest in number_cruncher.tummy] == [42, 40]
+
 
 def test_number_cruncher_raises_runtime_error_if_invalid_number_request():
     """Test that there is a runtime error if NumberRequester response is
@@ -52,4 +82,17 @@ def test_number_cruncher_raises_runtime_error_if_invalid_number_request():
         Result: 
             Raises RuntimeError
     """
-    pass
+    
+    number_cruncher = NumberCruncher(2)
+    number_cruncher.requester.call = Mock(side_effect=ValueError)
+
+    with pytest.raises(RuntimeError):
+        assert number_cruncher.crunch() == "Unexpected Error"
+
+
+def test_number_cruncher_raises_runtime_error_if_invalid_number_request_with_specific_return_value():
+    number_cruncher = NumberCruncher(2)
+    number_cruncher.requester.call = Mock(side_effect=ValueError)
+
+    with pytest.raises(RuntimeError):
+        assert number_cruncher.crunch() == "Unexpected Error"

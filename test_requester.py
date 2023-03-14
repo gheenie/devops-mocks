@@ -1,6 +1,7 @@
 from unittest.mock import Mock
 from cruncher import NumberRequester
 from unittest.mock import patch
+import datetime
 
 
 def test_number_requester_returns_a_valid_result_when_called():
@@ -87,22 +88,26 @@ def test_number_requester_keeps_log_of_requests(magicmock_requests_get):
     magicmock_response.status_code = 200
     magicmock_response.text = '23 random fact'
 
-    # print(patched_dt)
-    # patched_dt.now = Mock()
+    with patch('cruncher.dt') as magicmock_dt:
+        def fake_isoformat():
+            return datetime.date(2019, 3, 15)
+        mock_isoformat = Mock()
+        mock_isoformat.isoformat = fake_isoformat
+        magicmock_dt.now.return_value = mock_isoformat
 
-    number_requester = NumberRequester()
-    number_requester.call()
-    number_requester.call()
-    number_requester.call()
-    number_requester.call()
-    number_requester.call()
+        number_requester = NumberRequester()
+        number_requester.call()
+        number_requester.call()
+        number_requester.call()
+        number_requester.call()
+        number_requester.call()
 
-    # need to check for len() == 0
-    for i, each_log in enumerate(number_requester.log):
-        assert each_log == {
-            'request_number': i + 1, 
-            'call_time': 'test', 
-            'end_point': 'http://numbersapi.com/random/math',
-            'result': 'SUCCESS', 
-            'number': 23
-        }
+        # need to check for len() == 0
+        for i, each_log in enumerate(number_requester.log):
+            assert each_log == {
+                'request_number': i + 1, 
+                'call_time': datetime.date(2019, 3, 15), 
+                'end_point': 'http://numbersapi.com/random/math',
+                'result': 'SUCCESS', 
+                'number': 23
+            }

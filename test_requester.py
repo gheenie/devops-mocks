@@ -1,3 +1,8 @@
+from unittest.mock import Mock
+from cruncher import NumberRequester
+from unittest.mock import patch
+
+
 def test_number_requester_returns_a_valid_result_when_called():
     """Test that the call method returns a valid item.
     
@@ -8,10 +13,39 @@ def test_number_requester_returns_a_valid_result_when_called():
         A result as a dict in the form {'result': 'SUCCESS', 'number': 13, "fact": "13 is lucky for some."}
 
     """
-    pass
+    
+    mock_response = Mock()
+    mock_response.status_code = 200
+    mock_response.text = '13 is lucky for some.'
+
+    # Doesn't need to be inside with block.
+    number_requester = NumberRequester()
+
+    with patch('cruncher.requests.get', return_value=mock_response):
+        assert number_requester.call() == {
+            'result': 'SUCCESS', 
+            'number': 13, 
+            "fact": "13 is lucky for some."
+        }
 
 
-def test_number_requester_returns_error_result_for_non_200_response():
+def test_number_requester_returns_a_valid_result_when_called__using_MagicMock():
+    with patch('cruncher.requests.get') as magicmock_requests_get:
+        magicmock_response = magicmock_requests_get.return_value
+        magicmock_response.status_code = 200
+        magicmock_response.text = '13 is lucky for some.'
+
+        number_requester = NumberRequester()
+
+        assert number_requester.call() == {
+            'result': 'SUCCESS', 
+            'number': 13, 
+            "fact": "13 is lucky for some."
+        }
+
+
+@patch('cruncher.requests.get')
+def test_number_requester_returns_error_result_for_non_200_response(magicmock_requests_get):
     """Test that the call method returns a valid item when a request fails.
     
     Given:
@@ -21,10 +55,20 @@ def test_number_requester_returns_error_result_for_non_200_response():
         A result as a dict in the form {'result': 'FAILURE', 'error_code': 404}
     
     """
-    pass
+    
+    magicmock_response = magicmock_requests_get.return_value
+    magicmock_response.status_code = 404
+
+    number_requester = NumberRequester()
+
+    assert number_requester.call() == {
+        'result': 'FAILURE', 
+        'error_code': 404
+    }
 
 
-def test_number_requester_keeps_log_of_requests():
+@patch('cruncher.requests.get')
+def test_number_requester_keeps_log_of_requests(magicmock_requests_get):
     """Test that a NumberRequester instance keeps a log of its own requests.
 
     Given:
@@ -38,4 +82,27 @@ def test_number_requester_keeps_log_of_requests():
         'result': 'SUCCESS', 'number': 49}
     Ensure that you test that each dict is exactly correct - including the 'call_time'.
     """
-    pass
+    
+    magicmock_response = magicmock_requests_get.return_value
+    magicmock_response.status_code = 200
+    magicmock_response.text = '23 random fact'
+
+    # print(patched_dt)
+    # patched_dt.now = Mock()
+
+    number_requester = NumberRequester()
+    number_requester.call()
+    number_requester.call()
+    number_requester.call()
+    number_requester.call()
+    number_requester.call()
+
+    # need to check for len() == 0
+    for i, each_log in enumerate(number_requester.log):
+        assert each_log == {
+            'request_number': i + 1, 
+            'call_time': 'test', 
+            'end_point': 'http://numbersapi.com/random/math',
+            'result': 'SUCCESS', 
+            'number': 23
+        }

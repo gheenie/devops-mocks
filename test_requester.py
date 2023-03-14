@@ -88,7 +88,7 @@ def test_number_requester_keeps_log_of_requests(magicmock_requests_get):
     magicmock_response.status_code = 200
     magicmock_response.text = '23 random fact'
 
-    with patch('cruncher.dt') as magicmock_dt:
+    with patch('cruncher.dt') as magicmock_dt: #, Mock(now=Mock(isoformat=Mock(return_value=datetime.date(2019, 3, 15))))
         mock_isoformat = Mock()
         mock_isoformat.isoformat = lambda: datetime.date(2019, 3, 15)
         magicmock_dt.now.return_value = mock_isoformat

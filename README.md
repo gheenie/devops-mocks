@@ -14,7 +14,7 @@ It's quite common to see the following error when first setting up this sprint:
 ModuleNotFoundError: No module named 'requests'
 ```
 Here are a few steps you can take:
-- Deactivate your Virtual Environment and follow the setup steps again to recreate it.
+- Deactivate your Virtual Environment, delete your `venv` folder and follow the setup steps again to recreate it and install the requirements.
 - Close you terminal session and reopen it. Set the `PYTHONPATH` environment variable and try running `pytest` again.
 - When you're inside the Virtual Environment check where the `pytest` command is located. You can do this by running the command `which pytest`. It should give you the path to your local Venv directory. 
 - If the `pytest` command is not located in your local Venv then you may have installed Python globally on your machine. If that is the case then deactivate your venv and uninstall the global `pytest` by running `pip uninstall pytest`. Reactivate your virtual environment and re-run the `pytest` command.
